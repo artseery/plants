@@ -6,20 +6,28 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:dump": "docker compose exec db pg_dump -U plants plants > dump.sql",
+    "db:restore": "cat dump.sql | docker compose exec -T db psql -U plants plants"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.4.0",
+    "@prisma/client": "^7.4.0",
     "next": "16.1.6",
+    "pg": "^8.18.0",
+    "prettier": "^3.8.1",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "25.2.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "dotenv": "^17.2.4",
+    "eslint": "^9.39.2",
     "eslint-config-next": "16.1.6",
+    "prisma": "^7.4.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
