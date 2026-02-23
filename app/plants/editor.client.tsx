@@ -1,21 +1,21 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
+import styles from "./editor.module.css";
 
 export default function Editor({ slug }: { slug?: string }) {
+  type Category = { id: string; name: string };
+
   const editorRef = useRef<EditorJS>(null);
 
-  useEffect(() => {
-    let mounted = true;
+  const [categories, setCategories] = useState<Category[]>([]);
 
+  useEffect(() => {
     (async () => {
       const { default: EditorJS } = await import("@editorjs/editorjs");
       const { default: ImageTool } = await import("@editorjs/image");
-
-      if (!mounted) return;
-
       editorRef.current = new EditorJS({
         holder: "editor",
         tools: {
@@ -34,7 +34,6 @@ export default function Editor({ slug }: { slug?: string }) {
     })();
 
     return () => {
-      mounted = false;
       editorRef.current?.destroy?.();
       editorRef.current = null;
     };
@@ -49,10 +48,36 @@ export default function Editor({ slug }: { slug?: string }) {
     });
   };
 
+  const load = async () => {
+    try {
+      const res = await fetch("/api/categories");
+      const data: Category[] = await res.json();
+      setCategories(data);
+    } finally {
+      console.log("done");
+    }
+  };
+
+  async function onSubmit(e: React.SubmitEvent) {
+    e.preventDefault();
+    console.log(e);
+  }
+
   return (
-    <div className="editor">
+    <form className={styles.form} onSubmit={onSubmit}>
+      <select name="category" defaultValue="" onFocus={load}>
+        <option value="" disabled>
+          Выберите категорию
+        </option>
+        {categories.map((category: Category) => (
+          <option value={category.name} key={category.id}>
+            {category.name}
+          </option>
+        ))}
+      </select>
+      <input name="name" placeholder="Название" />
       <div id="editor" />
-      <button onClick={handleSave}>Save</button>
-    </div>
+      <button type="submit">Save</button>
+    </form>
   );
 }

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import Editor from "@/app/plants/[slug]/editor.client";
+import Editor from "@/app/plants/editor.client";
 
 export default async function PlantPage({
   params,

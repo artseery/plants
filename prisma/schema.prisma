@@ -7,10 +7,19 @@ datasource db {
   provider = "postgresql"
 }
 
+model Category {
+  id     String  @id @default(uuid())
+  name   String  @unique
+  slug   String  @unique
+  plants Plant[]
+}
+
 model Plant {
-  id        String   @id @default(uuid())
-  name      String
-  slug      String   @unique
-  article   Json?
-  createdAt DateTime @default(now())
+  id         String    @id @default(uuid())
+  name       String
+  slug       String    @unique
+  article    Json?
+  createdAt  DateTime  @default(now())
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
 }
