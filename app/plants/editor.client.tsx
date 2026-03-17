@@ -76,6 +76,7 @@ export default function Editor({ slug }: { slug?: string }) {
         optionLabel="name"
         optionValue="id"
         value={category}
+        className="w-full md:w-14rem"
         onChange={(e) => setCategory(e.value)}
       />
       <input name="name" placeholder="Название" />

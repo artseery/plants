@@ -6,6 +6,7 @@ export const runtime = "nodejs";
 
 function mimeByExt(name: string) {
   const ext = path.extname(name).toLowerCase();
+
   switch (ext) {
     case ".png":
       return "image/png";
@@ -21,32 +22,28 @@ function mimeByExt(name: string) {
   }
 }
 
-// защита от ../ (path traversal)
-function isSafeName(name: string) {
-  return /^[a-zA-Z0-9._-]+$/.test(name) && !name.includes("..");
+function isSafePath(parts: string[]) {
+  return parts.every((p) => /^[a-zA-Z0-9._-]+$/.test(p));
 }
 
 export async function GET(
   _req: Request,
-  { params }: { params: Promise<{ name: string }> },
+  { params }: { params: Promise<{ path: string[] }> },
 ) {
-  const { name } = await params;
+  const { path: parts } = await params;
 
-  // сюда можно вставить проверку авторизации/прав доступа
-  // например, по куке/токену и т.п.
-
-  if (!isSafeName(name)) {
-    return NextResponse.json({ error: "bad filename" }, { status: 400 });
+  if (!isSafePath(parts)) {
+    return NextResponse.json({ error: "bad path" }, { status: 400 });
   }
 
-  const fullPath = path.join(process.cwd(), "uploads", name);
+  const fullPath = path.join(process.cwd(), "uploads", ...parts);
 
   try {
     const file = await readFile(fullPath);
+
     return new NextResponse(file, {
       headers: {
-        "Content-Type": mimeByExt(name),
-        // "Content-Disposition": `attachment; filename="${name}"`,
+        "Content-Type": mimeByExt(parts.at(-1) || ""),
         "Cache-Control": "public, max-age=31536000, immutable",
       },
     });
