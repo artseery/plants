@@ -6,8 +6,8 @@ import Link from "next/link";
 export default async function CategoryList() {
   const categories = await prisma.category.findMany();
   return (
-    <section className={styles["category"]}>
-      <ul className={styles["category-list"]}>
+    <section className={`${styles["category"]} container`}>
+      <ul className={`${styles["category-list"]}`}>
         {categories.map(
           (category: {
             id: Key;

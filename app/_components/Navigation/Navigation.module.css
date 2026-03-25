@@ -1,0 +1,19 @@
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+.navigation-item {}
+.link {
+    text-decoration: none;
+    color: #3f3f3f;
+}
+.link:hover {
+    color: #727272;
+}
+.chevron {
+    width: 14px;
+    height: 14px;
+}
+
