@@ -25,6 +25,7 @@
     display: flex;
     cursor: pointer;
     text-decoration: none;
+    border: 2px solid #27AE60
 }
 .items-list-item-name {
     margin: 0;
@@ -41,14 +42,14 @@
     position: absolute;
     left: 0;
     top: 0;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 30%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 20%);
     background-size: 100% 200%;
     background-position: 0 100%;
     transition: background-position .1s ease
 }
 
 .items-list-item:hover .items-list-item-background {
-    background-position: 0 80%;
+    background-position: 0 90%;
 }
 .items-list-item:hover .items-list-item-name {
     /*color: rgb(0, 255, 0);*/

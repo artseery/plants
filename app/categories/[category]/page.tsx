@@ -6,25 +6,28 @@ import Navigation from "@/app/_components/Navigation/Navigation";
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ category: string }>;
 }) {
-  const { slug } = await params;
-  const category = await prisma.category.findUnique({
-    where: { slug },
+  const { category } = await params;
+  const foundCategory = await prisma.category.findUnique({
+    where: { slug: category },
   });
-  if (!category) {
+  if (!foundCategory) {
     notFound();
   }
 
   const navigation = [
     { name: "Категории", link: "/" },
-    { name: category.name, link: `/categories/${category.slug}` },
+    { name: foundCategory.name, link: `/categories/${foundCategory.slug}` },
   ];
 
   return (
     <section className="container">
       <Navigation navigation={navigation} />
-      <SpeciesList categoryId={category.id} />
+      <SpeciesList
+        categoryId={foundCategory.id}
+        categorySlug={foundCategory.slug}
+      />
     </section>
   );
 }

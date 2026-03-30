@@ -22,6 +22,8 @@ model Species {
   category   Category? @relation(fields: [categoryId], references: [id])
   categoryId String?
   createdAt  DateTime  @default(now())
+  imageUrl   String?
+  article    String?
   plants     Plant[]
 }
 
@@ -32,5 +34,6 @@ model Plant {
   article   Json?
   createdAt DateTime @default(now())
   species   Species? @relation(fields: [speciesId], references: [id])
+  imageUrl  String?
   speciesId String?
 }

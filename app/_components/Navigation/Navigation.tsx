@@ -2,6 +2,7 @@ import styles from "./Navigation.module.css";
 import { NavigationItem } from "@/types/navigation";
 import Link from "next/link";
 import React from "react";
+
 export default function Navigation({
   navigation,
 }: {
