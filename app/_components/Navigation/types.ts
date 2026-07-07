@@ -1,4 +1,4 @@
 export type NavigationItem = {
   name: string;
-  link: string | null;
+  link: string;
 };

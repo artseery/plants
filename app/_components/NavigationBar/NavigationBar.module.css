@@ -1,5 +1,5 @@
 .navigation-bar {
-    height: 100px;
+    height: 88px;
     background: #ffffff;
     padding: 10px 0;
     display: flex;
@@ -15,7 +15,7 @@
 }
 .navigation-bar-icon {
     position: relative;
-    aspect-ratio: 538/460;
+    aspect-ratio: 1175/850;
     height: 100%;
 }
 .navigation-bar-button {

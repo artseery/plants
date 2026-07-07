@@ -1,13 +1,13 @@
 import styles from "./Navigation.module.css";
-import { NavigationItem } from "@/types/navigation";
+import type { NavigationItem } from "./types";
 import Link from "next/link";
 import React from "react";
 
-export default function Navigation({
-  navigation,
-}: {
+type Props = {
   navigation: NavigationItem[];
-}) {
+}
+
+export default function Navigation({ navigation }: Props) {
   return (
     <div className={styles.navigation}>
       {navigation.map((item, key) => (

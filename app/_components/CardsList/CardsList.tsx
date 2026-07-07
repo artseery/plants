@@ -1,14 +1,14 @@
 import Image from "next/image";
 import styles from "./CardsList.module.css";
 import Link from "next/link";
-import { CardItem } from "@/types/cardItem";
-export default async function CardsList({
-  items,
-  urlBuilder,
-}: {
+import type { CardItem } from "./types";
+
+type Props = {
   items: CardItem[];
   urlBuilder: (slug: string) => string;
-}) {
+}
+
+export default function CardsList({ items, urlBuilder }: Props) {
   return (
     <section className={`${styles["items"]} container`}>
       <ul className={`${styles["items-list"]}`}>
