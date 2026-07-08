@@ -1,0 +1,30 @@
+.dropdown {
+  position: relative;
+  width: 300px;
+}
+.dropdown-select {
+  border-radius: 8px;
+  border: 1px solid rgb(185, 185, 185);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+.dropdown-options {
+  position: absolute;
+  background: #fff;
+  width: 100%;
+  left: 0;
+  top: calc(100% - 1px);
+  box-shadow: 0 0 8px lightgray;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+}
+.dropdown-options--shown {
+  opacity: 1;
+  pointer-events: all;
+}
+.dropdown-option {
+  padding: 8px;
+}

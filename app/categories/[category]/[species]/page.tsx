@@ -44,6 +44,9 @@ export default async function Page({ params }: Props) {
           <Image src={`/api/files/${foundSpecies.imageUrl}`} alt={foundSpecies.name} objectFit="contain" fill/>
         </div>
         }
+        <div className={styles['species-article']}>
+          { foundSpecies.article }
+        </div>
       </div>
     </section>
   );

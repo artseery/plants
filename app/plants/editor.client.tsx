@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import styles from "./editor.module.css";
-import { Dropdown } from "primereact/dropdown";
+import Dropdown from "../_components/Dropdown/Dropdown";
 
 export default function Editor({ slug }: { slug?: string }) {
   type Category = { id: string; name: string };
@@ -67,18 +67,8 @@ export default function Editor({ slug }: { slug?: string }) {
   }
 
   return (
-    <form className={styles.form} onSubmit={onSubmit}>
-      <Dropdown
-        loading={isLoadingCategories}
-        onFocus={loadCategories}
-        placeholder="Категория"
-        options={categories}
-        optionLabel="name"
-        optionValue="id"
-        value={category}
-        className="w-full md:w-14rem"
-        onChange={(e) => setCategory(e.value)}
-      />
+    <form className={`${styles.form} container`} onSubmit={onSubmit}>
+      <Dropdown items={{ a: "test", b: "test2" }} selectedItemId="a" />
       <input name="name" placeholder="Название" />
       <div id="editor" />
       <button type="submit">Save</button>
